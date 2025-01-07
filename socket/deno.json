@@ -1,0 +1,17 @@
+{
+    "tasks": {
+        "dev": "deno run --allow-net --allow-read --allow-env --watch  server.ts ",
+        "build": "tsc --watch index.ts --outDir public"
+    },
+    "imports": {
+        "@razmio/web-server": "jsr:@razmio/web-server@^0.2.1",
+        "@std/assert": "jsr:@std/assert@1",
+        "@land/jsx": "https://deno.land/x/jsx@v0.1.5/mod.ts"
+    },
+    "compilerOptions": {
+        "jsx": "react",
+        "jsxFactory": "h",
+        "jsxFragmentFactory": "Fragment",
+        "lib": ["dom", "esnext", "deno.ns", "deno.window"]
+    }
+}

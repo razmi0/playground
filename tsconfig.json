@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "target": "es2022",
+        "allowJs": true,
+        "resolveJsonModule": true,
+        "moduleDetection": "force",
+        "isolatedModules": true,
+        "verbatimModuleSyntax": true,
+        "lib": ["es2022"],
+        "module": "NodeNext",
+        "outDir": "dist"
+    },
+    // Include the necessary files for your project
+    "include": ["index.ts", "src/**/*.ts", "src/**/*.ts"],
+    "exclude": ["node_modules"]
+}

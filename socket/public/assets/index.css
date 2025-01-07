@@ -1,0 +1,20 @@
+#button-group {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    background-color: #f1f1f1;
+    padding: 10px;
+    gap: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #ccc;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #858181;
+    color: white;
+    cursor: pointer;
+}

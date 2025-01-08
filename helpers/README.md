@@ -11,8 +11,9 @@ To install `@razmio/helpers`, add the following import map to your `deno.json` f
 ```json
 {
     "imports": {
-        "@std/assert": "jsr:@std/assert@1",
+        ...
         "@razmio/helpers": "./mod.ts"
+        ...
     }
 }
 ```

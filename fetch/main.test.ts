@@ -1,53 +1,91 @@
 // deno run test --allow-net fetch/main_test.ts
-import { assertEquals } from "@std/assert";
+import { assertEquals, assertRejects } from "@std/assert";
 import { describe, it } from "@std/testing/bdd";
+import { mockFetch } from "../test_helpers/utils.ts";
 import { fetchWithCallbacks } from "./main.ts";
 
-describe("fetchWithCallbacks function", () => {
-    it("should handle successful fetch", async () => {
-        const correct = {
-            userId: 1,
-            id: 1,
-            title: "delectus aut autem",
-            completed: false,
-        };
+type APIFetchData = {
+    success: {
+        message: "Success";
+    };
+    error: {
+        message: "Not Found";
+    };
+};
 
-        const result = await fetchWithCallbacks<{
-            userId: number;
-            id: number;
-            title: string;
-            completed: boolean;
-        }>("https://jsonplaceholder.typicode.com/todos/1", {
+describe("fetchWithCallbacks function", () => {
+    /**
+     *
+     */
+
+    it("[onSuccess] : should handle successful fetch", async () => {
+        mockFetch({
+            expected: "success",
+            returnData: {
+                message: "Success",
+            },
+        });
+        const result = await fetchWithCallbacks<APIFetchData["success"]>("", {
             onSuccess: (_response, json) => {
                 return json;
             },
         });
 
-        assertEquals(result, correct);
+        assertEquals(result.response.status, 200);
+        assertEquals(result.data, { message: "Success" });
     });
 
-    it("should handle fetch error", async () => {
-        const correct = { message: "Not Found" };
+    /**
+     *
+     */
 
+    it("[onError] : should handle fetch error 404", async () => {
+        mockFetch({
+            expected: "error",
+            returnData: {
+                message: "Not Found",
+            },
+        });
         // Mock fetch to return a 404 error
-        globalThis.fetch = (_input: string | URL | Request) => {
-            return Promise.resolve(
-                new Response(JSON.stringify({ message: "Not Found" }), {
-                    status: 404,
-                    statusText: "Not Found",
-                })
-            );
-        };
 
-        const result = await fetchWithCallbacks<never, { message: 404 }>(
-            "https://jsonplaceholder.typicode.com/todos/1",
-            {
-                onError: (_response, json) => {
-                    return json;
+        const result = await fetchWithCallbacks<never, APIFetchData["error"]>("", {
+            onError: (_response, json) => {
+                return json;
+            },
+        });
+
+        assertEquals(result.data, { message: "Not Found" });
+        assertEquals(result.response.status, 404);
+    });
+
+    /**
+     *
+     */
+
+    it("[before] : should handle throw error in before cb", () => {
+        assertRejects(() => {
+            return fetchWithCallbacks<never, never>("", {
+                before: () => {
+                    throw new Error("Error");
                 },
-            }
-        );
+            });
+        });
+    });
 
-        assertEquals(result, correct);
+    /**
+     *
+     */
+    it("[after] : should return the before cb return data", async () => {
+        const result = await fetchWithCallbacks<{
+            userId: number;
+            id: number;
+            title: string;
+            completed: boolean;
+        }>("", {
+            before: () => "Hi from before",
+            after: (beforeReturn) => beforeReturn,
+        });
+
+        assertEquals(result.afterData, "Hi from before");
     });
 });

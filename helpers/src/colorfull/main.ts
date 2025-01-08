@@ -39,3 +39,5 @@ export const colorfull = (color: keyof typeof colors, text: string): string => {
     }
     return `${colors[color]}${text}${colors.reset}`;
 };
+
+// hi

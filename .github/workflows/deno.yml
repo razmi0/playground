@@ -12,11 +12,11 @@ on:
   push:
     branches: ["main"]
     paths:
-      - "./helpers/**"
+      - "./helpers/src/**"
   pull_request:
     branches: ["main"]
     paths:
-      - "./helpers/**"
+      - "./helpers/src/**"
 
 permissions:
   contents: read

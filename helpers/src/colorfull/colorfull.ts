@@ -1,4 +1,4 @@
-const colors = {
+export const colors = {
     black: "\x1b[0;90m",
     red: "\x1b[0;91m",
     green: "\x1b[0;92m",
@@ -18,11 +18,11 @@ const colors = {
     reset: "\x1b[0m",
 };
 
-const colorfull = (color: keyof typeof colors, text: string) => {
+export type Colors = typeof colors;
+
+export const colorfull = (color: keyof typeof colors, text: string) => {
     if (!colors[color]) {
         throw new Error(`Invalid color: ${color}`);
     }
     return `${colors[color]}${text}${colors.reset}`;
 };
-
-export default colorfull;

@@ -1,5 +1,5 @@
 import { assertEquals } from "@std/assert";
-import { wait } from "../utils/wait.ts";
+import { wait } from "../src/wait/wait.ts";
 
 Deno.test("[wait] : wait 100ms", async function (): Promise<void> {
     const duration = 100;

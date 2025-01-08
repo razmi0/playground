@@ -1,18 +1,10 @@
-import chalk from "chalk";
+import { type Colors, colorfull } from "../colorfull/colorfull.ts";
 
 const STDOUT = Deno.stdout;
 
-//
-
-// private spinnerColor = chalk.blue, // private asciispinner = ["▖", "▘", "▝", "▗"],
-// private spinnerText = "Loading",
-// private intervalTime = 100,
-// private iterator = { i: 0 },
-// private interval: ReturnType<typeof setInterval> | undefined = undefined,
-// private encoder = new TextEncoder()
 export type SpinnerConfig = {
     asciispinner: string[];
-    spinnerColor: (str: string) => string;
+    spinnerColor: keyof Colors;
     spinnerText: string;
     intervalTime: number;
     iterator: { i: number };
@@ -21,6 +13,29 @@ export type SpinnerConfig = {
     variant: "gross" | "default";
 };
 
+/**
+ * @exemple
+ * ```ts
+ * const spinner = new Spinner();
+ * spinner.start();
+ * // Do some work here
+ * spinner.stop();
+ * ```
+ * The default config is SpinnerConfig type :
+ * ```ts
+ * {
+ *  asciispinner: ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"],
+ *  spinnerColor: "blue",
+ *  spinnerText: "Loading",
+ *  intervalTime: 100,
+ *  iterator: { i: 0 },
+ *  interval: null,
+ *  encoder: new TextEncoder(),
+ *  variant: "default",
+ * }
+ *```
+ * Available themes : "gross" or "default"
+ */
 export class Spinner {
     public cfg: SpinnerConfig;
 
@@ -30,7 +45,7 @@ export class Spinner {
     constructor(config: Partial<SpinnerConfig> = {}) {
         const defaultConfig: SpinnerConfig = {
             asciispinner: this.sp_default,
-            spinnerColor: chalk.blue,
+            spinnerColor: "blue",
             spinnerText: "Loading",
             intervalTime: 100,
             iterator: { i: 0 },
@@ -56,7 +71,7 @@ export class Spinner {
         }
         this.padlog(`  ${this.cfg.spinnerText}`);
         this.cfg.interval = setInterval(() => {
-            this.padlog(this.cfg?.spinnerColor?.(this.cfg.asciispinner[this.moduloIdx()]));
+            this.padlog(colorfull(this.cfg.spinnerColor, this.cfg.asciispinner[this.moduloIdx()]));
         }, this.cfg.intervalTime);
     };
 

@@ -1,12 +1,13 @@
 import { assert, assertEquals, assertNotEquals } from "@std/assert";
-import { Spinner, SpinnerConfig } from "../spinner/main.ts"; // Adjust the import path accordingly
+import { colors } from "../src/colorfull/colorfull.ts"; // Adjust the import path accordingly
+import { Spinner, SpinnerConfig } from "../src/spinner/main.ts"; // Adjust the import path accordingly
 
 Deno.test("[Spinner] : initializes with default config", () => {
     const spinner = new Spinner();
     assertEquals(spinner.cfg.spinnerText, "Loading");
     assertEquals(spinner.cfg.intervalTime, 100);
     assert(Array.isArray(spinner.cfg.asciispinner));
-    assert(spinner.cfg.spinnerColor instanceof Function);
+    assert(colors[spinner.cfg.spinnerColor] !== undefined);
 });
 
 Deno.test("[Spinner] : accepts custom configuration", () => {

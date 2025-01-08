@@ -1,4 +1,4 @@
-import { safe } from "../utils/safe.ts";
+import { safe } from "../safe/safe.ts";
 
 type FetchCallbacks<JsonResponse, JsonError, BeforeReturnType, AfterReturnType> = {
     onError?: (res: Response, data: JsonError) => unknown;

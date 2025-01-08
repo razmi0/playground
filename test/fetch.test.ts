@@ -1,6 +1,6 @@
 import { assertEquals, assertRejects } from "@std/assert";
-import { mockFetch } from "../test_helpers/utils.ts";
-import { fetchWithCallbacks } from "./main.ts";
+import { mockFetch } from "./helpers/utils.ts";
+import { fetchWithCallbacks } from "../fetch/main.ts";
 
 type APIFetchData = {
     success: {

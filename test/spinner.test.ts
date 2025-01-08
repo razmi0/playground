@@ -1,5 +1,5 @@
 import { assert, assertEquals, assertNotEquals } from "@std/assert";
-import { Spinner, SpinnerConfig } from "./main.ts"; // Adjust the import path accordingly
+import { Spinner, SpinnerConfig } from "../spinner/main.ts"; // Adjust the import path accordingly
 
 Deno.test("[Spinner] : initializes with default config", () => {
     const spinner = new Spinner();

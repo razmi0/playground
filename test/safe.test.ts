@@ -1,5 +1,5 @@
 import { assert, assertThrows } from "@std/assert";
-import { safe } from "./safe.ts";
+import { safe } from "../utils/safe.ts";
 
 // Test: Should catch errors
 Deno.test("[safe] : should catch errors", () => {

@@ -1,6 +1,10 @@
 import { safe } from "../safe/main.ts";
 
-type FetchCallbacks<JsonResponse, JsonError, BeforeReturnType, AfterReturnType> = {
+/**
+ * @module fetchWithCallbacks
+ * Callbacks types
+ */
+export type FetchCallbacks<JsonResponse, JsonError, BeforeReturnType, AfterReturnType> = {
     onError?: (res: Response, data: JsonError) => unknown;
     onSuccess?: (res: Response, data: JsonResponse) => unknown;
     before?: () => BeforeReturnType;

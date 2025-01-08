@@ -1,6 +1,6 @@
 import { assert, assertEquals, assertNotEquals } from "@std/assert";
-import { colors } from "../src/colorfull/colorfull.ts"; // Adjust the import path accordingly
-import { Spinner, SpinnerConfig } from "../src/spinner/main.ts"; // Adjust the import path accordingly
+import { colors } from "../src/colorfull/main.ts"; // Adjust the import path accordingly
+import { Spinner, type SpinnerConfig } from "../src/spinner/main.ts"; // Adjust the import path accordingly
 
 Deno.test("[Spinner] : initializes with default config", () => {
     const spinner = new Spinner();

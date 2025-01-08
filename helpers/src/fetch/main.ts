@@ -1,4 +1,4 @@
-import { safe } from "../safe/safe.ts";
+import { safe } from "../safe/main.ts";
 
 type FetchCallbacks<JsonResponse, JsonError, BeforeReturnType, AfterReturnType> = {
     onError?: (res: Response, data: JsonError) => unknown;
@@ -12,6 +12,36 @@ type FetchCallbacks<JsonResponse, JsonError, BeforeReturnType, AfterReturnType> 
  * - onSuccess executed when response.ok
  * - onError executed when response.ok is false
  * - before return data === after parameter
+ *
+ * @exemple
+ * ```ts
+ *
+ * type Post = {
+ *  userId: number;
+ *  id: number;
+ *  title: string;
+ *  completed: boolean;
+ * };
+ *
+ * type ErrorPost = {
+ *   message: string;
+ * };
+ *
+ * const { response, data, afterData } = await fetchWithCallbacks<Post, ErrorPost, string>("https://dummyjson.com/todos/1?delay=3000", {
+ *  onError: (res, data) => {
+ *      console.error("Error:", res.status, data);
+ *      return data;
+ *  },
+ *  onSuccess: (_res, data) => {
+ *      console.log("Success:", data);
+ *      return data;
+ *  },
+ *  before: () => "Hello from before",
+ *  after: (beforeReturn) => {
+ *      console.log("After callback:", beforeReturn);
+ *  },
+ *});
+ * ```
  */
 export const fetchWithCallbacks = <
     JsonResponse = unknown,

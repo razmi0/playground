@@ -1,5 +1,5 @@
 import { assertEquals, assertThrows } from "@std/assert";
-import { colorfull } from "../src/colorfull/colorfull.ts"; // Adjust the path to the actual location of `colorfull`
+import { colorfull } from "../src/colorfull/main.ts"; // Adjust the path to the actual location of `colorfull`
 
 Deno.test("[colorfull] : should wrap text with the correct color codes", () => {
     const result = colorfull("red", "Hello, World!");

@@ -1,4 +1,4 @@
-import { type Colors, colorfull } from "../colorfull/colorfull.ts";
+import { type Colors, colorfull } from "../colorfull/main.ts";
 
 const STDOUT = Deno.stdout;
 

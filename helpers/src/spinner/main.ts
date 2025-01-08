@@ -65,7 +65,7 @@ export class Spinner {
      *
      */
 
-    start = () => {
+    start = (): void => {
         if (this.cfg.interval) {
             clearInterval(this.cfg.interval);
         }
@@ -75,11 +75,11 @@ export class Spinner {
         }, this.cfg.intervalTime);
     };
 
-    moduloIdx = () => this.cfg.iterator.i++ % this.cfg.asciispinner.length;
+    moduloIdx = (): number => this.cfg.iterator.i++ % this.cfg.asciispinner.length;
 
-    encode = (str: string) => this.cfg.encoder.encode(str);
+    encode = (str: string): Uint8Array => this.cfg.encoder.encode(str);
 
-    stop = () => {
+    stop = (): void => {
         if (this.cfg.interval) {
             clearInterval(this.cfg.interval);
             this.cfg.interval = null;
@@ -89,9 +89,9 @@ export class Spinner {
         this.clearLine();
     };
 
-    padlog = (str: string) => STDOUT.writeSync(this.encode(`\r${str}`));
+    padlog = (str: string): number => STDOUT.writeSync(this.encode(`\r${str}`));
 
-    clearLine() {
+    clearLine(): void {
         STDOUT.writeSync(this.encode(`\r`)); // Move back to the beginning
         STDOUT.writeSync(this.encode(" ".repeat(80))); // Clear the line
         STDOUT.writeSync(this.encode(`\r`)); // Move back to the beginning again

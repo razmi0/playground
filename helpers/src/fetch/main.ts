@@ -51,7 +51,22 @@ export const fetchWithCallbacks = <
 >(
     url: string,
     callbacks: FetchCallbacks<JsonResponse, JsonError, BeforeReturnType, AfterReturnType>
-) => {
+):
+    | Promise<{
+          response: Response;
+          data: JsonResponse;
+          afterData: AfterReturnType;
+      }>
+    | Promise<{
+          response: Response;
+          data: JsonError;
+          afterData: AfterReturnType;
+      }>
+    | Promise<{
+          response: Response;
+          data: JsonResponse | JsonError;
+          afterData: AfterReturnType;
+      }> => {
     return safe(async () => {
         const { onError, onSuccess, before, after } = callbacks;
         let data: JsonResponse | JsonError;

@@ -20,7 +20,7 @@ export const colors = {
 
 export type Colors = typeof colors;
 
-export const colorfull = (color: keyof typeof colors, text: string) => {
+export const colorfull = (color: keyof typeof colors, text: string): string => {
     if (!colors[color]) {
         throw new Error(`Invalid color: ${color}`);
     }

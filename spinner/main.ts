@@ -65,7 +65,10 @@ export class Spinner {
     encode = (str: string) => this.cfg.encoder.encode(str);
 
     stop = () => {
-        if (this.cfg.interval) clearInterval(this.cfg.interval);
+        if (this.cfg.interval) {
+            clearInterval(this.cfg.interval);
+            this.cfg.interval = null;
+        }
 
         this.cfg.iterator.i = 0;
         this.clearLine();
@@ -79,9 +82,3 @@ export class Spinner {
         STDOUT.writeSync(this.encode(`\r`)); // Move back to the beginning again
     }
 }
-
-// const spinner = new Spinner();
-// spinner.start();
-// setTimeout(() => {
-//     spinner.stop();
-// }, 2000);

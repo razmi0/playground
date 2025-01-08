@@ -35,19 +35,18 @@ export const fetchWithCallbacks = <
             return { response, json: (await response.json()) as JsonResponse | JsonError };
         })();
 
-        // Handle success or error based on `response.ok`.
+        let afterData: AfterReturnType | undefined = undefined;
+        if (after) afterData = after(beforePayload);
+
         if (response.ok) {
             data = onSuccess ? (onSuccess(response, json as JsonResponse) as JsonResponse) : (json as JsonResponse);
-        } else {
-            data = onError ? (onError(response, json as JsonError) as JsonError) : (json as JsonError);
+            return { response, data, afterData } as {
+                response: Response;
+                data: JsonResponse;
+                afterData: AfterReturnType;
+            };
         }
-
-        // Execute the `after` callback if provided and if `before` was executed.
-        let afterData: AfterReturnType | undefined = undefined;
-        if (after) {
-            afterData = after(beforePayload);
-        }
-
-        return { response, data, afterData };
+        data = onError ? (onError(response, json as JsonError) as JsonError) : (json as JsonError);
+        return { response, data, afterData } as { response: Response; data: JsonError; afterData: AfterReturnType };
     });
 };

@@ -1,8 +1,8 @@
 import { assertEquals } from "@std/assert";
 import { wait } from "./wait.ts";
 
-Deno.test("wait", async function (): Promise<void> {
-    const duration = 500;
+Deno.test("[wait] : wait 100ms", async function (): Promise<void> {
+    const duration = 100;
     const start = performance.now();
     await wait(duration);
     const end = performance.now();

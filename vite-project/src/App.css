@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#root {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+}
+
+body {
+    height: 100dvh;
+    background-color: rgb(6, 16, 126);
+    color: white;
+}
+
+button {
+    padding: 0.5rem 1rem;
+    margin: 0.5rem;
+    border: none;
+    border-radius: 0.25rem;
+    background-color: rgb(49, 64, 228);
+    color: white;
+    cursor: pointer;
+}

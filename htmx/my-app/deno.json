@@ -4,12 +4,14 @@
         "hono": "jsr:@hono/hono@^4.6.16",
         "htmx.org": "npm:htmx.org@2.0.4",
         "postcss": "npm:postcss@^8.4.49",
-        "tailwindcss": "npm:tailwindcss@^3.4.17"
+        "tailwindcss": "npm:tailwindcss@^3.4.17",
+        "@/": "./src/"
     },
     "tasks": {
-        "start": "deno run --allow-net --allow-read --watch main.tsx",
-        "bundle": "deno run --allow-read --allow-write --allow-env --allow-net --allow-run --watch src/client/bundle.ts",
-        "tw": "npx tailwindcss -i ./src/client/index.css -o ./public/index.css --watch"
+        "start": "deno run --allow-net --allow-read --watch server.tsx",
+        "bundle": "deno run --allow-read --allow-write --allow-env --allow-net --allow-run --watch src/client/lib/bundle.ts",
+        "tw": "npx tailwindcss -i ./src/client/index.css -o ./public/index.css --watch",
+        "dev": "deno run start ; deno run bundle ; deno run tw"
     },
     "compilerOptions": {
         "jsx": "precompile",

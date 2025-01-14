@@ -27,16 +27,13 @@ const Counter = ({ add, hxPath, id }: { add?: number; hxPath: string; id: string
     count += add || 0;
     return (
         <section id={id}>
-            <div class="flex flex-row justify-between items-center mb-2">
-                <h3>Counter</h3>
-                <span class="font-bold">{count}</span>
-            </div>
-            <div class="grid grid-cols-2 gap-2">
+            <div class="grid grid-cols-3 gap-2">
                 <Button hxPath={hxPath} target={`section#${id}`} add={1}>
-                    Increment
+                    +
                 </Button>
+                <span class="font-bold content-center">{count}</span>
                 <Button hxPath={hxPath} target={`section#${id}`} add={-1}>
-                    Decrement
+                    -
                 </Button>
             </div>
         </section>

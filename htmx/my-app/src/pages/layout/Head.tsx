@@ -1,4 +1,4 @@
-const Head = ({ children }: { children: string }) => {
+export const Head = ({ children }: { children: string }) => {
     return (
         <head>
             <meta charset="UTF-8" />
@@ -8,13 +8,5 @@ const Head = ({ children }: { children: string }) => {
             <script type="module" src="/libs/htmx.js"></script>
             <title>{children}</title>
         </head>
-    );
-};
-export const Layout = ({ children, title }: { children: any; title: string }) => {
-    return (
-        <html lang="en">
-            <Head>{title}</Head>
-            <body>{children}</body>
-        </html>
     );
 };
